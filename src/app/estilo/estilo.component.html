@@ -1,1 +1,27 @@
-<p>estilo works!</p>
+<div class="card h-100">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-start mb-2">
+      <h5 class="card-title text-truncate">{{ project.name }}</h5>
+      <span class="badge" [ngClass]="getStatusColor(project.status)">{{ project.status }}</span>
+    </div>
+
+    <p class="card-text text-muted mb-3">Cliente: {{ project.client }}</p>
+
+    <div class="mb-3">
+      <div class="d-flex justify-content-between mb-1">
+        <small>Progreso</small>
+        <small>{{ project.progress }}%</small>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" 
+             [ngClass]="getProgressColor(project.progress, project.isLate)"
+             [style.width.%]="project.progress"></div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <span class="badge bg-light text-dark">{{ project.priority }}</span>
+      <small class="text-muted">Entrega: {{ project.dueDate | date }}</small>
+    </div>
+  </div>
+</div>
