@@ -29,7 +29,7 @@ Este repositorio contiene el código fuente del frontend para un panel de contro
 
 2. **Navegar a la carpeta donde se encuentra el proyecto con:**
 
-   `cd solemne2-main`
+   `cd solemne2`
 
 3. **Instalar dependencias:**
 
