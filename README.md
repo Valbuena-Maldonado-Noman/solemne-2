@@ -26,16 +26,16 @@ Este repositorio contiene el código fuente del frontend para un panel de contro
 1. **En una terminal clonar el repositorio usando:**
 `git clone https://github.com/Valbuena-Maldonado-Noman/solemne-2.git`
 
-3. **Navegar a la carpeta donde se encuentra el proyecto con:**
+2. **Navegar a la carpeta donde se encuentra el proyecto con:**
 `cd proyecto`
 
-5. **Instalar dependencias:**
+3. **Instalar dependencias:**
 `npm install`
 
-7. **Ejecutar servidor de desarrollo:**
+4. **Ejecutar servidor de desarrollo:**
 `ng serve`
 
-9. **Para acceder a la aplicación abrir en el navegador:**
+5. **Para acceder a la aplicación abrir en el navegador:**
 [http://localhost:4200](http://localhost:4200)
 
 ---
@@ -44,22 +44,22 @@ Este repositorio contiene el código fuente del frontend para un panel de contro
 1. **En una terminal clonar el repositorio usando:**
 `git clone https://github.com/Valbuena-Maldonado-Noman/solemne-2.git`
 
-2. Navegar a la carpeta del proyecto (donde está el `Dockerfile`):  
+2. **Navegar a la carpeta del proyecto (donde está el `Dockerfile`):**  
    `cd proyecto`
    
-3. Construir la imagen:  
+3. **Construir la imagen:**  
    `docker build -t solemne-2 .`
    
-4. Ejecutar el contenedor:  
+4. **Ejecutar el contenedor:**  
    `docker run -p 8080:80 solemne-2`
    
-5. Acceder desde el navegador:  
+5. **Acceder desde el navegador:**  
    [http://localhost:8080](http://localhost:8080)
    
-6. Para detener el contenedor:  
+6. **Para detener el contenedor:**  
    `docker stop <solemne-2>`
    
-7. Para eliminar el contenedor:  
+7. **Para eliminar el contenedor:**  
    `docker rm <solemne-2>`
 
 ---
