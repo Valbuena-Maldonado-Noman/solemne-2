@@ -1,59 +1,119 @@
-# Proyecto
+#  Solemne 2
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+## Integrantes
+* Sebastian Valbuena
+* Benjamín Maldonado
+* Francisco Noman
+  
+Este repositorio contiene el código fuente del frontend para un panel de control web, diseñado como MVP para gestionar proyectos y avances. La interfaz ha sido estilizada con un diseño profesional y claro. Entre sus funciones se encuentran:
+1. Visualizar el estado de cada proyecto (En progreso, Finalizado, Atrasado).
+2. Filtrado de proyectos por cliente.
+3. Filtrado de proyectos por nombre.
+4. Filtrado de proyectos por prioridad.
+5. Filtrado de proyectos por estado.
+6. Visualizar el seguimiento porcentual en cada proyecto.
+7. Notificaciones de entregas atrasadas.
+8. Información relevante de proyectos.
 
-## Development server
+   
+- Diseñado en Angular
+- Control de versiones con Git
+- Preparado para el despliegue con Docker
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## Despliegue local del proyecto
+1. **En una terminal clonar el repositorio usando:**
+`git clone https://github.com/Valbuena-Maldonado-Noman/solemne-2.git`
+
+3. **Navegar a la carpeta donde se encuentra el proyecto con:**
+`cd proyecto`
+
+5. **Instalar dependencias:**
+`npm install`
+
+7. **Ejecutar servidor de desarrollo:**
+`ng serve`
+
+9. **Para acceder a la aplicación abrir en el navegador:**
+[http://localhost:4200](http://localhost:4200)
+
+---
+
+## Despliegue con Docker 
+1. **En una terminal clonar el repositorio usando:**
+`git clone https://github.com/Valbuena-Maldonado-Noman/solemne-2.git`
+
+2. Navegar a la carpeta del proyecto (donde está el `Dockerfile`):  
+   `cd proyecto`
+   
+3. Construir la imagen:  
+   `docker build -t solemne-2 .`
+   
+4. Ejecutar el contenedor:  
+   `docker run -p 8080:80 solemne-2`
+   
+5. Acceder desde el navegador:  
+   [http://localhost:8080](http://localhost:8080)
+   
+6. Para detener el contenedor:  
+   `docker stop <solemne-2>`
+   
+7. Para eliminar el contenedor:  
+   `docker rm <solemne-2>`
+
+---
+
+## Dockerfile utilizado
+```dockerfile
+# Etapa 1: Construcción de la app Angular
+FROM node:18 AS build
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+# Etapa 2: Servir con nginx
+FROM nginx:alpine
+
+# Copiar configuración personalizada de nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copiar los archivos compilados del frontend
+COPY --from=build /app/dist/proyecto/browser /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+## Configuración Nginx utilizada
+Archivo para que el despliegue en Docker funcione correctamente en Angular (Debe estar en la raiz del proyecto junto al Dockerfile):
 ```
+worker_processes 1;
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+events {
+  worker_connections 1024;
+}
 
-```bash
-ng generate --help
+http {
+  include       mime.types;
+  default_type  application/octet-stream;
+  sendfile        on;
+  keepalive_timeout  65;
+
+  server {
+    listen 80;
+
+    location / {
+      root /usr/share/nginx/html;
+      index index.html;
+      try_files $uri $uri/ /index.html;
+    }
+  }
+}
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
